@@ -26,6 +26,9 @@ public class SimpleSmoothMouseLook : MonoBehaviour
     private Transform rotationFollower;
     private Snowball snowball;
 
+    private Vector3 forward = new Vector3(0, 0, 1);
+    private float mousex = 0.0f;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -33,6 +36,19 @@ public class SimpleSmoothMouseLook : MonoBehaviour
         // Set target direction for the character body to its inital state.
         rb = GetComponent<Rigidbody>();
         targetCharacterDirection = rb.transform.localRotation.eulerAngles;
+    }
+
+    void Update()
+    {
+        mousex = mousex * (1.0f - Time.deltaTime*0.5f);
+
+        if (snowball.IsGrounded())
+        {
+            mousex += Input.GetAxisRaw("Mouse X") * 0.5f;
+        }
+
+        if (mousex < -1.0) mousex = -1.0f;
+        if (mousex > 1.0) mousex = 1.0f;
     }
 
 
@@ -79,19 +95,28 @@ public class SimpleSmoothMouseLook : MonoBehaviour
         if (snowball.IsGrounded() && Mathf.Abs(mDelta.x) > 0.02f)
         {
             Vector3 force;
+            var right = Vector3.Cross(Vector3.up, rb.velocity);
             if (mDelta.x > 0)
             {
-                force = transform.right * speed * mDelta.x;
-                rb.AddForce(force, ForceMode.Acceleration);
+                force = right * speed * mDelta.x;
+                //rb.AddForce(force, ForceMode.Acceleration);
             }
             else
             {
-                force = transform.right * speed * mDelta.x;
-                rb.AddForce(force, ForceMode.Acceleration);
+                force = right * speed * mDelta.x;
+                //rb.AddForce(force, ForceMode.Acceleration);
             }
-            // limit max velocity
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocityMagnitude);
+            //rb.velocity = (rb.velocity.normalized + forward.normalized).normalized;
         }
+
+        if (snowball.IsGrounded())
+        {
+            rb.velocity = Quaternion.Euler(0, mousex * 2.0f, 0) * rb.velocity;
+        }
+        
+
+        // limit max velocity
+        //rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocityMagnitude);
     }
     
 }
