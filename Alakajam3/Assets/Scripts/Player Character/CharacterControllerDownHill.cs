@@ -7,6 +7,8 @@ public class CharacterControllerDownHill : MonoBehaviour
 
     private Rigidbody rb;
 
+    private float timer = 0f;
+
     [SerializeField]
     private float turnSpeed = 10f;
 
@@ -19,6 +21,7 @@ public class CharacterControllerDownHill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         float horizontalAxis = Input.GetAxis("Horizontal");
         float margin = 0.01f;
         if (horizontalAxis > margin)
@@ -34,6 +37,16 @@ public class CharacterControllerDownHill : MonoBehaviour
 
     private void LateUpdate()
     {
+        //Debug.Log(rb.velocity.magnitude);
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            
+            Debug.Log(timer);
+            Destroy(collision.gameObject);
+        }
     }
 }
