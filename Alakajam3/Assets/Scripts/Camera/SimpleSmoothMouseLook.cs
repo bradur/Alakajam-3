@@ -36,7 +36,7 @@ public class SimpleSmoothMouseLook : MonoBehaviour
     }
 
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         Cursor.lockState = CursorLockMode.Locked;
         // Ensure the cursor is always locked when set
@@ -74,17 +74,19 @@ public class SimpleSmoothMouseLook : MonoBehaviour
         }
         // dont turn ball if mouse isnt moving
         //Debug.Log(snowball.IsGrounded());
-        if (snowball.IsGrounded() && Mathf.Abs(_mouseAbsolute.x) > 8f)
+        Vector2 mDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        Debug.Log(mDelta);
+        if (snowball.IsGrounded() && Mathf.Abs(mDelta.x) > 0.02f)
         {
             Vector3 force;
-            if (_mouseAbsolute.x > 0)
+            if (mDelta.x > 0)
             {
-                force = transform.right * speed * _mouseAbsolute.x;
+                force = transform.right * speed * mDelta.x;
                 rb.AddForce(force, ForceMode.Acceleration);
             }
             else
             {
-                force = transform.right * speed * _mouseAbsolute.x;
+                force = transform.right * speed * mDelta.x;
                 rb.AddForce(force, ForceMode.Acceleration);
             }
             // limit max velocity
