@@ -21,14 +21,14 @@ TagManager:
   - World
   - Player
   - Particles
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - ScaleLevel0
+  - ScaleLevel1
+  - ScaleLevel2
+  - ScaleLevel3
+  - SnowballLevel0
+  - SnowballLevel1
+  - SnowballLevel2
+  - SnowballLevel3
   - 
   - 
   - 

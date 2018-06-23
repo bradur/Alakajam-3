@@ -9,6 +9,9 @@ public class Obstacle : MonoBehaviour
     private ScriptableObstacle obstacleValues;
     [SerializeField]
     private Vector3 originalScale;
+    private Vector3 relativePosition;
+    private Quaternion relativeRotation;
+    private Collider collider;
 
     private void Reset()
     {
@@ -18,7 +21,7 @@ public class Obstacle : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log(obstacleValues.requiredScale);
+        collider = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -41,4 +44,25 @@ public class Obstacle : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public bool IsCollectable()
+    {
+        return obstacleValues.collectable;
+    }
+
+    public Quaternion GetRelativeRotation()
+    {
+        return relativeRotation;
+    }
+
+    public Vector3 GetRelativePosition()
+    {
+        return relativePosition;
+    }
+
+    public void SetColliderActive(bool active)
+    {
+        collider.enabled = active;
+    }
+
 }

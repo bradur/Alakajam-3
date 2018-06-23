@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Snowball : MonoBehaviour
@@ -8,6 +9,10 @@ public class Snowball : MonoBehaviour
     private ParticleSystemDestroy explosionParticle;
     [SerializeField]
     private Material snowballMaterial;
+    [SerializeField]
+    private Transform childBall;
+    [SerializeField]
+    private ScriptableScale scales;
 
     private bool exploded = false;
 
@@ -24,6 +29,7 @@ public class Snowball : MonoBehaviour
     private float destroyExplodeMargin = 0.9f;
 
     private Rigidbody rbody;
+    private SphereCollider collider;
 
     // Use this for initialization
     void Start()
@@ -31,13 +37,16 @@ public class Snowball : MonoBehaviour
         rbody = GetComponent<Rigidbody>();
         MeshRenderer renderer = GetComponent<MeshRenderer>();
         snowballMaterial = renderer.sharedMaterials[0];
+        collider = GetComponent<SphereCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         float speed = rbody.velocity.magnitude;
-        this.transform.localScale = Vector3.one * scale;
+        //Only scale collider radius of _this_ object and scale the child that holds the mesh 
+        collider.radius = scale;
+        this.childBall.localScale = Vector3.one * scale;
 
         snowballMaterial.mainTextureScale = new Vector2(scale, scale);
 
@@ -54,10 +63,9 @@ public class Snowball : MonoBehaviour
             grounded = false;
         }
 
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, 100f, layerMask))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, layerMask))
         {
-            Debug.Log(hit.collider.gameObject.tag);
-            if(hit.collider.gameObject.tag == "Snow")
+            if (hit.collider.gameObject.tag == "Snow")
             {
                 if (grounded)
                 {
@@ -78,11 +86,20 @@ public class Snowball : MonoBehaviour
                 if (obstacle != null)
                 {
                     Debug.Log(scale + ", " + obstacle.GetRequiredScale() + ", " + destroyExplodeMargin * obstacle.GetRequiredScale());
-                    if (scale > obstacle.GetRequiredScale())
+                    /*if (scale > obstacle.GetRequiredScale())
                     {
-                        obstacle.Destroy();
+                        if (!obstacle.IsCollectable())
+                        {
+                            obstacle.Destroy();
+                        }
+                        else
+                        {
+                            obstacle.transform.parent = transform;
+                            obstacle.SetColliderActive(false);
+                        }
                     }
-                    else if (scale > destroyExplodeMargin * obstacle.GetRequiredScale())
+                    else */
+                    if (scale > destroyExplodeMargin * obstacle.GetRequiredScale())
                     {
                         //eep, nothing happens
                         Debug.Log("eeps");
@@ -100,6 +117,37 @@ public class Snowball : MonoBehaviour
                 else
                 {
                     Debug.Log("ksdlktöjsfötgyj");
+                }
+            }
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Obstacle" && !exploded)
+        {
+            Debug.Log("moi");
+            ObstacleTrigger trigger = other.gameObject.GetComponent<ObstacleTrigger>();
+            if (trigger != null)
+            {
+                Obstacle obstacle = trigger.GetParent();
+                Debug.Log("moimoi");
+                if (!obstacle.IsCollectable())
+                {
+                    obstacle.Destroy();
+                }
+                else
+                {
+                    Debug.Log("moimoimoi");
+                    obstacle.transform.parent = transform;
+                    obstacle.SetColliderActive(false);
+
+                    string layerName = LayerMask.LayerToName(obstacle.gameObject.layer);
+                    StringFloat x = scales.growAmounts.Where(s => s.key == layerName).SingleOrDefault();
+                    if (x != null)
+                    {
+                        scale += x.value;
+                    }
                 }
             }
         }

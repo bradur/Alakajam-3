@@ -5,7 +5,7 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "ScriptableObstacle", menuName = "Obstacles")]
+[CreateAssetMenu(fileName = "ScriptableObstacle", menuName = "ScriptableObjects/Obstacles")]
 public class ScriptableObstacle : ScriptableObject
 {
     [SerializeField]
