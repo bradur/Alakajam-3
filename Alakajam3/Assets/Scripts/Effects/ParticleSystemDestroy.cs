@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class ParticleSystemDestroy : MonoBehaviour
 {
+    private ParticleSystem particles;
+    [SerializeField]
+    private float particleSize;
 
     // Use this for initialization
     void Start()
     {
-        ParticleSystem ps = GetComponent<ParticleSystem>();
-        if (ps != null)
+        particles = GetComponent<ParticleSystem>();
+        if (particles != null)
         {
-            Destroy(gameObject, ps.main.duration);
+            var main = particles.main;
+            main.startSizeMultiplier = particleSize;
+            Destroy(gameObject, particles.main.duration);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
 
+    public void SetParticleSize(float size)
+    {
+        particleSize = size;
     }
 }
