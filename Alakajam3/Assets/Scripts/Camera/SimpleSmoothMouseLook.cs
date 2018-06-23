@@ -15,13 +15,6 @@ public class SimpleSmoothMouseLook : MonoBehaviour
     [SerializeField]
     private float speed = 50;
 
-
-    [SerializeField]
-    private float minTorque = -5f;
-    [SerializeField]
-    private float maxTorque = 5f;
-
-    private float torque = 0f;
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
     // Yaw rotation will affect this object instead of the camera if set.
     private Rigidbody rb;
@@ -31,17 +24,15 @@ public class SimpleSmoothMouseLook : MonoBehaviour
 
     [SerializeField]
     private Transform rotationFollower;
+    private Snowball snowball;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        // Set target direction to the camera's initial orientation.
-        //targetDirection = transform.localRotation.eulerAngles;
-
+        snowball = GetComponent<Snowball>();
         // Set target direction for the character body to its inital state.
         rb = GetComponent<Rigidbody>();
-        //targetCharacterDirection = rb.transform.localRotation.eulerAngles;
-
+        targetCharacterDirection = rb.transform.localRotation.eulerAngles;
     }
 
 
@@ -54,7 +45,6 @@ public class SimpleSmoothMouseLook : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
         // Allow the script to clamp based on a desired target value.
-        var targetOrientation = Quaternion.Euler(targetDirection);
         var targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
 
         // Get raw mouse input for a cleaner reading on more sensitive mice.
@@ -76,52 +66,30 @@ public class SimpleSmoothMouseLook : MonoBehaviour
         if (clampInDegrees.y < 360)
             _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
 
-        //transform.localRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation;
-        //Quaternion rot = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation;
-        //rotationFollower.eulerAngles = -rb.velocity;
-        //Debug.Log(_mouseAbsolute.x);
-        var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, Vector3.up);
-        rotationFollower.transform.localRotation = yRotation * targetCharacterOrientation;
-        Debug.Log(_mouseAbsolute.x);
-        if (Mathf.Abs(_mouseAbsolute.x) > 8f)
+        // show wanted rotation (arrow)
+        if (rotationFollower != null)
         {
-            //torque = Mathf.Clamp(torque + _mouseAbsolute.x * speed, minTorque, maxTorque);
-
+            var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, Vector3.up);
+            rotationFollower.transform.localRotation = yRotation * targetCharacterOrientation;
+        }
+        // dont turn ball if mouse isnt moving
+        //Debug.Log(snowball.IsGrounded());
+        if (snowball.IsGrounded() && Mathf.Abs(_mouseAbsolute.x) > 8f)
+        {
+            Vector3 force;
             if (_mouseAbsolute.x > 0)
             {
-                rb.AddForce(Vector3.right * speed, ForceMode.Acceleration);
+                force = transform.right * speed * _mouseAbsolute.x;
+                rb.AddForce(force, ForceMode.Acceleration);
             }
             else
             {
-                rb.AddForce(Vector3.left * speed, ForceMode.Acceleration);
+                force = transform.right * speed * _mouseAbsolute.x;
+                rb.AddForce(force, ForceMode.Acceleration);
             }
-            Debug.Log(rb.velocity.magnitude);
-            /*if (rb.velocity.magnitude > maxVelocityMagnitude)
-            {
-
-                Vector3 newVelocity = rb.velocity.normalized;
-                newVelocity *= maxVelocityMagnitude;
-                rb.velocity = newVelocity;
-            }*/
-            /*Debug.Log(rotationFollower.transform.localRotation.y);
-            torque = Mathf.Clamp(rotationFollower.transform.localRotation.y * 20f, minTorque, maxTorque);
-            if (Mathf.Abs(rotationFollower.transform.localRotation.y) > 0.05f)
-            {
-                rb.AddTorque(0, torque, 0, ForceMode.Force);
-            }*/
+            // limit max velocity
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocityMagnitude);
         }
-        /*if (rb != null && Mathf.Abs(_mouseAbsolute.x) > 0.05f)
-        {*/
-        /*torque += mouseDelta.x * speed;
-        torque = Mathf.Clamp(torque, minTorque, maxTorque);*/
-        /*torque = Mathf.Clamp(-(rotationFollower.transform.eulerAngles.y - clampInDegrees.x), minTorque, maxTorque);
-        Debug.Log(torque);*/
-        //torque = -rotationFollower.transform.eulerAngles.y;
-        //rb.AddTorque(0, torque, 0, ForceMode.Force);
-        //}
-        //rotationFollower.transform.localRotation = Quaternion.Euler(0, rb.transform.eulerAngles.y, 0);
-
-        //rb.transform.eulerAngles = new Vector3(rb.transform.eulerAngles.x, rb.transform.eulerAngles.y, 0f);
     }
     
 }
