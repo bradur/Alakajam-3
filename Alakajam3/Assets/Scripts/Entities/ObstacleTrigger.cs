@@ -6,6 +6,9 @@ public class ObstacleTrigger : MonoBehaviour
 {
     Obstacle parentObstacle;
 
+    [SerializeField]
+    private GameObject startThisObjectAfterCollision;
+
     // Use this for initialization
     void Start()
     {
@@ -21,5 +24,14 @@ public class ObstacleTrigger : MonoBehaviour
     public Obstacle GetParent()
     {
         return parentObstacle;
+    }
+
+    // ends level if not null
+    public void CollideWithPlayer()
+    {
+        if (startThisObjectAfterCollision != null)
+        {
+            startThisObjectAfterCollision.SetActive(true);
+        }
     }
 }
