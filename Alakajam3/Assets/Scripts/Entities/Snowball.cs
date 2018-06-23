@@ -46,28 +46,27 @@ public class Snowball : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        cameraTransposer = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineTransposer>();
         ballCollider = GetComponent<SphereCollider>();
         rbody = GetComponent<Rigidbody>();
 
         snowballMaterial = meshRenderer.sharedMaterials[0];
+        cameraTransposer = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineTransposer>();
     }
 
     public bool IsGrounded()
     {
-        //RaycastHit hit;
-        //return Physics.Raycast(transform.position, Vector3.down, out hit, transform.localScale.y + 0.1f);
         return Physics.CheckSphere(
             transform.position,
             ballCollider.radius * transform.localScale.y + 0.5f,
             snowLayer
         );
-        //return Physics.SphereCast(transform.position, ballCollider.radius, Vector3.down, out hit, transform.localScale.y + 0.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        updateLayer(scale);
+
         float speed = rbody.velocity.magnitude;
         //Only scale collider radius of _this_ object and scale the child that holds the mesh 
         ballCollider.radius = scale;
@@ -88,6 +87,7 @@ public class Snowball : MonoBehaviour
                 {
                     //TODO: scale according to the material below
                     scale = scale + growthRate * (speed * speedCoef) * Time.deltaTime;
+                    scales.currentScale = scale;
 
                     // distance of camera (z distance) gets bigger when scale gets bigger
                     cameraTransposer.m_FollowOffset.z = -(5f + (scale / 0.25f));
@@ -156,6 +156,31 @@ public class Snowball : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private string getLayerOfScale(float scale)
+    {
+        string layer = scales.levelThresholds[0].key;
+
+        foreach(StringFloat x in scales.levelThresholds)
+        {
+            if(x.value <= scale)
+            {
+                layer = x.key;
+            }
+        }
+
+        return layer;
+    }
+
+    private void updateLayer(float scale)
+    {
+        int currentLayer = gameObject.layer;
+        int newLayer = LayerMask.NameToLayer(getLayerOfScale(scale));
+        if(currentLayer != newLayer)
+        {
+            gameObject.layer = newLayer;
         }
     }
 }
