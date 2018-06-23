@@ -75,7 +75,7 @@ public class SimpleSmoothMouseLook : MonoBehaviour
         // dont turn ball if mouse isnt moving
         //Debug.Log(snowball.IsGrounded());
         Vector2 mDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-        Debug.Log(mDelta);
+
         if (snowball.IsGrounded() && Mathf.Abs(mDelta.x) > 0.02f)
         {
             Vector3 force;
