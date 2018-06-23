@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Wall
   - Ground
+  - Obstacle
+  - Snow
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,10 @@ public class Snowball : MonoBehaviour
     private float growthRate = 0.1f;
     [SerializeField]
     private float speedCoef = 0.1f;
+    [SerializeField]
+    [Tooltip("Percentage of obstacle scale at which the ball explodes.")]
+    private float destroyExplodeMargin = 0.9f;
+
     private Rigidbody rbody;
 
     // Use this for initialization
@@ -34,42 +38,69 @@ public class Snowball : MonoBehaviour
     {
         float speed = rbody.velocity.magnitude;
         this.transform.localScale = Vector3.one * scale;
-        if (grounded)
-        {
-            //TODO: scale according to the material below
-            scale = scale + growthRate * (speed * speedCoef) * Time.deltaTime;
-        }
 
         snowballMaterial.mainTextureScale = new Vector2(scale, scale);
+
+        RaycastHit hit;
+        int playerLayer = 10;
+        int layerMask = ~(1 << playerLayer); // When checking for ground type, ignore player itself just in case
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, transform.localScale.y + 0.1f))
+        {
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
+        }
+
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, 100f, layerMask))
+        {
+            Debug.Log(hit.collider.gameObject.tag);
+            if(hit.collider.gameObject.tag == "Snow")
+            {
+                if (grounded)
+                {
+                    //TODO: scale according to the material below
+                    scale = scale + growthRate * (speed * speedCoef) * Time.deltaTime;
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         foreach (ContactPoint contact in collision.contacts)
         {
-            if (contact.otherCollider.tag == "Ground")
+            if (contact.otherCollider.tag == "Obstacle" && !exploded)
             {
-                grounded = true;
-            }
-            if (contact.otherCollider.tag == "Wall" && !exploded)
-            {
-                ParticleSystemDestroy explosion = Instantiate<ParticleSystemDestroy>(explosionParticle);
-                explosion.SetParticleSize(scale * 0.4f);
-                explosion.transform.position = transform.position;
-                explosion.gameObject.SetActive(true);
-                exploded = true;
-                Destroy(gameObject);
-            }
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            if (contact.otherCollider.tag == "Ground")
-            {
-                grounded = false;
+                Obstacle obstacle = contact.otherCollider.gameObject.GetComponent<Obstacle>();
+                if (obstacle != null)
+                {
+                    Debug.Log(scale + ", " + obstacle.GetRequiredScale() + ", " + destroyExplodeMargin * obstacle.GetRequiredScale());
+                    if (scale > obstacle.GetRequiredScale())
+                    {
+                        obstacle.Destroy();
+                    }
+                    else if (scale > destroyExplodeMargin * obstacle.GetRequiredScale())
+                    {
+                        //eep, nothing happens
+                        Debug.Log("eeps");
+                    }
+                    else
+                    {
+                        ParticleSystemDestroy explosion = Instantiate<ParticleSystemDestroy>(explosionParticle);
+                        explosion.SetParticleSize(scale * 0.4f);
+                        explosion.transform.position = transform.position;
+                        explosion.gameObject.SetActive(true);
+                        exploded = true;
+                        Destroy(gameObject);
+                    }
+                }
+                else
+                {
+                    Debug.Log("ksdlktöjsfötgyj");
+                }
             }
         }
     }
