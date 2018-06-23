@@ -9,6 +9,9 @@ public class Obstacle : MonoBehaviour
     private ScriptableObstacle obstacleValues;
     [SerializeField]
     private Vector3 originalScale;
+    [SerializeField]
+    private ParticleSystem particleSystem;
+
     private Vector3 relativePosition;
     private Quaternion relativeRotation;
     private Collider collider;
@@ -22,6 +25,10 @@ public class Obstacle : MonoBehaviour
     void Start()
     {
         collider = GetComponent<Collider>();
+        if(particleSystem != null)
+        {
+            particleSystem.Stop();
+        }
     }
 
     // Update is called once per frame
@@ -42,6 +49,10 @@ public class Obstacle : MonoBehaviour
 
     public void Destroy()
     {
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+        }
         Destroy(gameObject);
     }
 

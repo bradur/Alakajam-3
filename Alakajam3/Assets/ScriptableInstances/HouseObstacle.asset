@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: House
   scale: 1
-  requiredScale: 1
+  requiredScale: 2
   collectable: 0
