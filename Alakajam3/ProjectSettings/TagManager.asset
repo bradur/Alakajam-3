@@ -25,15 +25,15 @@ TagManager:
   - ScaleLevel1
   - ScaleLevel2
   - ScaleLevel3
+  - ScaleLevel4
+  - ScaleLevel5
   - SnowballLevel0
   - SnowballLevel1
   - SnowballLevel2
   - SnowballLevel3
-  - 
-  - 
-  - 
-  - 
-  - 
+  - SnowballLevel4
+  - SnowballLevel5
+  - SnowballLevel6
   - 
   - 
   - 

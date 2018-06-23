@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Small House
   scale: 0.9
-  requiredScale: 0.5
+  requiredScale: 0.35
   collectable: 1

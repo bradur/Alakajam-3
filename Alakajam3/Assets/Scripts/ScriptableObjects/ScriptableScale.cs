@@ -11,25 +11,13 @@ public class ScriptableScale : ScriptableObject
     public string Name { get { return objectName; } }
 
     [SerializeField]
-    public List<StringFloat> growAmounts; /*= new List<StringFloat>()
-    {
-        new StringFloat("ScaleLevel0", 0.3f ),
-        new StringFloat( "ScaleLevel1", 0.6f ),
-        new StringFloat( "ScaleLevel2", 1.2f ),
-        new StringFloat( "ScaleLevel3", 3.6f )
-    };*/
+    public List<StringFloat> growAmounts;
 
-    // Use this for initialization
-    void Start()
-    {
+    [SerializeField]
+    public List<StringFloat> levelThresholds;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public float startingScale = 0.3f;
+    public float currentScale = 0.3f;
 }
 
 [Serializable]
