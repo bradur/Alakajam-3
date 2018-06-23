@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: HouseObstacle
   m_EditorClassIdentifier: 
   objectName: House
-  scale: 2
-  requiredScale: 1.5
+  scale: 1
+  requiredScale: 1
+  collectable: 0
