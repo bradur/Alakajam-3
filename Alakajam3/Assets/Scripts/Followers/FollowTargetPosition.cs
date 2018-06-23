@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowTargetRotation : MonoBehaviour {
+public class FollowTargetPosition : MonoBehaviour
+{
 
     [SerializeField]
     private Transform target;
 
     [SerializeField]
     private bool local = true;
-
 
     [SerializeField]
     private bool followX = true;
@@ -18,40 +18,41 @@ public class FollowTargetRotation : MonoBehaviour {
     [SerializeField]
     private bool followZ = true;
 
-
     // Use this for initialization
-    void Start () {
-        
+    void Start()
+    {
+
     }
-    
+
     // Update is called once per frame
-    void Update () {
-        Vector3 rotation = transform.localEulerAngles;
-        Vector3 targetRotation = target.transform.localEulerAngles;
+    void Update()
+    {
+        Vector3 position = transform.localPosition;
+        Vector3 targetPosition = target.transform.localPosition;
         if (!local)
         {
-            rotation = transform.eulerAngles;
-            targetRotation = target.transform.eulerAngles;
+            position = transform.position;
+            targetPosition = target.transform.position;
         }
         if (followX)
         {
-            rotation.x = target.transform.eulerAngles.x;
+            position.x = targetPosition.x;
         }
         if (followY)
         {
-            rotation.y = target.transform.eulerAngles.y;
+            position.y = targetPosition.y;
         }
         if (followZ)
         {
-            rotation.z = target.transform.eulerAngles.z;
+            position.z = targetPosition.z;
         }
         if (local)
         {
-            transform.localEulerAngles = rotation;
+            transform.localPosition = position;
         }
         else
         {
-            transform.eulerAngles = rotation;
+            transform.position = position;
         }
     }
 }
