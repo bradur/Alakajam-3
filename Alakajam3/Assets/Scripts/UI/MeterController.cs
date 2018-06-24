@@ -12,12 +12,12 @@ public class MeterController : MonoBehaviour
     private ScriptableScale scales;
 
     private float minScale = 0f;
-    private float maxScale;
+    private float maxScale = 2f;
 
     // Use this for initialization
     void Start()
     {
-        maxScale = scales.levelThresholds[scales.levelThresholds.Count - 1].value;
+        //maxScale = scales.levelThresholds[scales.levelThresholds.Count - 1].value;
     }
 
     // Update is called once per frame
