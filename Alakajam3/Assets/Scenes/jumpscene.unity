@@ -1289,6 +1289,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114148758360540648, guid: 329d131b2dc07994c919e26fda434913,
+        type: 2}
+      propertyPath: startThisObjectAfterCollision
+      value: 
+      objectReference: {fileID: 1984816181}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 329d131b2dc07994c919e26fda434913, type: 2}
   m_IsPrefabParent: 0
@@ -2402,7 +2407,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-8843974
+  m_Name: pb_Mesh-20057260
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
