@@ -7,46 +7,43 @@ public class CharacterControllerDownHill : MonoBehaviour
 
     private Rigidbody rb;
 
-    private float timer = 0f;
-
     [SerializeField]
-    private float turnSpeed = 10f;
+    private float turnSpeed = 250f;
+
+    float horizontalAxis, verticalAxis;
 
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.maxAngularVelocity = 100f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        float horizontalAxis = Input.GetAxis("Horizontal");
-        float margin = 0.01f;
-        if (horizontalAxis > margin)
-        {
-            rb.AddTorque(0, 0, horizontalAxis * -turnSpeed, ForceMode.Force);
-        }
-        else if (horizontalAxis < -margin)
-        {
-            rb.AddTorque(0, 0, horizontalAxis * -turnSpeed, ForceMode.Force);
-        }
+        horizontalAxis = Input.GetAxis("Horizontal");
+        verticalAxis = Input.GetAxis("Vertical");
+    }
 
+    void FixedUpdate()
+    {
+
+        Vector3 fwd = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+        fwd = new Vector3(fwd.x, 0, fwd.z);
+        right = new Vector3(right.x, 0, right.z);
+        rb.AddTorque(right * verticalAxis * turnSpeed, ForceMode.Force);
+        rb.AddTorque(-fwd * horizontalAxis * turnSpeed, ForceMode.Force);
+        //rb.AddTorque(0, 0, horizontalAxis * turnSpeed, ForceMode.Force);
+        print(horizontalAxis * turnSpeed);
     }
 
     private void LateUpdate()
     {
-        //Debug.Log(rb.velocity.magnitude);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            
-            Debug.Log(timer);
-            Destroy(collision.gameObject);
-        }
     }
 }

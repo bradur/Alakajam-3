@@ -29,6 +29,11 @@ public class SimpleSmoothMouseLook : MonoBehaviour
     private Vector3 forward = new Vector3(0, 0, 1);
     private float mousex = 0.0f;
 
+    private Vector3 desiredDirection = new Vector3(0, 0, 0);
+
+    private Vector3 rotateAxis = Vector3.right;
+    private float rotateSpeed = 0.0f;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -41,14 +46,30 @@ public class SimpleSmoothMouseLook : MonoBehaviour
     void Update()
     {
         mousex = mousex * (1.0f - Time.deltaTime*0.5f);
+        desiredDirection = desiredDirection * (1.0f - Time.deltaTime * 0.5f);
 
         if (snowball.IsGrounded())
         {
             mousex += Input.GetAxisRaw("Mouse X") * 0.5f;
+
+            Vector3 fwd = Camera.main.transform.forward;
+            Vector3 right = Camera.main.transform.right;
+            fwd = new Vector3(fwd.x, 0, fwd.z);
+            right = new Vector3(right.x, 0, right.z);
+            desiredDirection = desiredDirection + fwd*Input.GetAxisRaw("Mouse Y")*0.25f + right*Input.GetAxisRaw("Mouse X") * 0.25f;
+
+            rotateAxis = Vector3.Cross(snowball.contactNormal, rb.velocity);
+            rotateSpeed = rb.velocity.magnitude / (Mathf.PI * snowball.getRadius()) * 180;
         }
 
         if (mousex < -1.0) mousex = -1.0f;
         if (mousex > 1.0) mousex = 1.0f;
+        if (desiredDirection.magnitude > 1.0f)
+        {
+            desiredDirection = desiredDirection.normalized;
+        }
+        
+        transform.RotateAround(transform.position, rotateAxis, Time.deltaTime * rotateSpeed);
     }
 
 
@@ -111,12 +132,24 @@ public class SimpleSmoothMouseLook : MonoBehaviour
 
         if (snowball.IsGrounded())
         {
-            rb.velocity = Quaternion.Euler(0, mousex * 2.0f, 0) * rb.velocity;
+            var angle = Vector3.Angle(snowball.contactNormal, snowball.lastContactNormal);
+            if (angle > 0.1f && angle < 90f)
+            {
+                //var vel_right = Quaternion.Euler(0, -90, 0) * rb.velocity.normalized;
+                //rb.velocity = rb.velocity.magnitude * Vector3.Cross(snowball.contactNormal, vel_right).normalized;
+                //rb.AddForce(snowball.contactNormal.normalized * -1.0f);
+            }
+            //rb.velocity = Quaternion.Euler(0, mousex * 2.0f, 0) * rb.velocity;
+            Vector3 dir = new Vector3(desiredDirection.normalized.x, rb.velocity.normalized.y, desiredDirection.normalized.z);
+
+            Debug.DrawLine(transform.position, transform.position + dir * 10, Color.red);
+            rb.velocity = Vector3.RotateTowards(rb.velocity, dir, 2 * Time.fixedDeltaTime, 0.0f);
         }
-        
 
         // limit max velocity
         //rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocityMagnitude);
+        //rb.AddForce(Vector3.down * 10.0f);
+        
     }
-    
+
 }
