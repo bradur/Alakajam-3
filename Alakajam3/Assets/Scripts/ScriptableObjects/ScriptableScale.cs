@@ -18,6 +18,7 @@ public class ScriptableScale : ScriptableObject
 
     public float startingScale = 0.3f;
     public float currentScale = 0.3f;
+    public float snowGrowAmount = 0.07f;
 }
 
 [Serializable]

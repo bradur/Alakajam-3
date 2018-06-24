@@ -13,5 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Snowman
   scale: 0.2
-  requiredScale: 0.4
+  requiredScale: 0.1
+  cow: 0
   collectable: 1

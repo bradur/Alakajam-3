@@ -13,5 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Tree
   scale: 0.75
-  requiredScale: 1.5
+  requiredScale: 1.49
+  cow: 0
   collectable: 1

@@ -40,5 +40,6 @@ MonoBehaviour:
     value: 2.5
   - key: SnowballLevel6
     value: 4
-  startingScale: 0.3
-  currentScale: 2.013202
+  startingScale: 0.4
+  currentScale: 0.37278903
+  snowGrowAmount: 0.035

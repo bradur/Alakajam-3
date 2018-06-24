@@ -20,8 +20,8 @@ public class Snowball : MonoBehaviour
     private float scale = 0.1f;
     [SerializeField]
     private bool grounded = false;
-    [SerializeField]
-    private float growthRate = 0.1f;
+
+    private float growthRate;// = 0.1f;
     [SerializeField]
     private float speedCoef = 0.1f;
     [SerializeField]
@@ -113,6 +113,11 @@ public class Snowball : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        growthRate = scales.snowGrowAmount;
     }
 
     private void OnCollisionEnter(Collision collision)
