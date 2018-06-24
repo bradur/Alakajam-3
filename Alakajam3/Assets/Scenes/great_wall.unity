@@ -5312,6 +5312,8 @@ PlayableDirector:
     value: {fileID: 1199442391}
   - key: {fileID: 114971544654138916, guid: da8b1753de7e35a43a3463dda4abf6d5, type: 2}
     value: {fileID: 93337481}
+  - key: {fileID: 114340711769775292, guid: da8b1753de7e35a43a3463dda4abf6d5, type: 2}
+    value: {fileID: 1634074031}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &826401565
@@ -25943,6 +25945,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e86bfd1d6f05c54ebf3a816f3bd2063, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1634074031 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1047462011572260, guid: 4741c50bc5146504d9730f7857bd0810,
+    type: 2}
+  m_PrefabInternal: {fileID: 94013101}
 --- !u!4 &1637895277 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4926657745235696, guid: d6ca8b3f694ddf54198cb20594be2df7,
