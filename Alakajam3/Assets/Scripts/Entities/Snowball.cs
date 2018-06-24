@@ -171,6 +171,7 @@ public class Snowball : MonoBehaviour
                     StringFloat x = scales.growAmounts.Where(s => s.key == layerName).SingleOrDefault();
                     if (x != null)
                     {
+                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + x.value, transform.localPosition.z);
                         scale += x.value;
                     }
                 }

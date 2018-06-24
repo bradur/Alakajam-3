@@ -36,7 +36,7 @@ public class CharacterControllerDownHill : MonoBehaviour
         rb.AddTorque(right * verticalAxis * turnSpeed, ForceMode.Force);
         rb.AddTorque(-fwd * horizontalAxis * turnSpeed, ForceMode.Force);
         //rb.AddTorque(0, 0, horizontalAxis * turnSpeed, ForceMode.Force);
-        print(horizontalAxis * turnSpeed);
+        //print(horizontalAxis * turnSpeed);
     }
 
     private void LateUpdate()
