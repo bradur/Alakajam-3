@@ -41,7 +41,7 @@ public class Snowball : MonoBehaviour
     private SphereCollider ballCollider;
 
     public Vector3 contactNormal = new Vector3();
-    public Vector3 lastContactNormal = new Vector3(); 
+    public Vector3 lastContactNormal = new Vector3();
 
     [SerializeField]
     private LayerMask snowLayer;
@@ -97,7 +97,7 @@ public class Snowball : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, layerMask))
         {
-            if(hit.collider.gameObject.tag == "Snow")
+            if (hit.collider.gameObject.tag == "Snow")
             {
                 if (grounded)
                 {
@@ -155,13 +155,9 @@ public class Snowball : MonoBehaviour
             ObstacleTrigger trigger = other.gameObject.GetComponent<ObstacleTrigger>();
             if (trigger != null)
             {
-                
-                Obstacle obstacle = trigger.GetParent();
-                if (obstacle.IsCow())
-                {
-                    SoundManager.main.PlaySound(SoundType.Cow);
 
-                }
+                Obstacle obstacle = trigger.GetParent();
+
                 if (!obstacle.IsCollectable())
                 {
                     trigger.CollideWithPlayer();
@@ -169,6 +165,20 @@ public class Snowball : MonoBehaviour
                 }
                 else
                 {
+                    if (obstacle.IsCow())
+                    {
+                        if (SoundManager.main != null)
+                        {
+                            SoundManager.main.PlaySound(SoundType.Cow);
+                        }
+                    }
+                    else
+                    {
+                        if (SoundManager.main != null)
+                        {
+                            SoundManager.main.PlaySound(SoundType.SmoothCrash);
+                        }
+                    }
                     obstacle.transform.parent = transform;
                     obstacle.SetColliderActive(false);
                     string layerName = LayerMask.LayerToName(obstacle.gameObject.layer);
@@ -186,9 +196,9 @@ public class Snowball : MonoBehaviour
     {
         string layer = scales.levelThresholds[0].key;
 
-        foreach(StringFloat x in scales.levelThresholds)
+        foreach (StringFloat x in scales.levelThresholds)
         {
-            if(x.value <= scale)
+            if (x.value <= scale)
             {
                 layer = x.key;
             }
@@ -201,7 +211,7 @@ public class Snowball : MonoBehaviour
     {
         int currentLayer = gameObject.layer;
         int newLayer = LayerMask.NameToLayer(getLayerOfScale(scale));
-        if(currentLayer != newLayer)
+        if (currentLayer != newLayer)
         {
             gameObject.layer = newLayer;
         }

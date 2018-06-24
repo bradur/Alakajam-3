@@ -23,10 +23,10 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 1.04
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 979d17af0c59ef3469d6874d78a24bc8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0.358
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.2719319, g: 0.30441412, b: 0.3555186, a: 0.358}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -618,8 +618,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
-  m_LocalRotation: {x: 0.2151909, y: -0.33803985, z: 0.07969866, w: 0.91272676}
-  m_LocalPosition: {x: -18.91563, y: 101.66975, z: 120.847305}
+  m_LocalRotation: {x: 0.21957962, y: -0.3227144, z: 0.0772393, w: 0.91742814}
+  m_LocalPosition: {x: -20.825459, y: 102.503685, z: 118.874985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1690,7 +1690,11 @@ Prefab:
     - target: {fileID: 2300000, guid: 7c24ddea288fe5a4480cdf41d2d7d4dc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2a6e4dfd6a181e0448525df090a6d046, type: 2}
+      objectReference: {fileID: 2100000, guid: c95bc1ba5f62e554aa117605f6451eba, type: 2}
+    - target: {fileID: 2300000, guid: 7c24ddea288fe5a4480cdf41d2d7d4dc, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c24ddea288fe5a4480cdf41d2d7d4dc, type: 3}
   m_IsPrefabParent: 0
@@ -1859,7 +1863,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1265978568}
-  m_LocalRotation: {x: 0.2151909, y: -0.33803985, z: 0.07969866, w: 0.91272676}
+  m_LocalRotation: {x: 0.21957962, y: -0.3227144, z: 0.0772393, w: 0.91742814}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.20000018, y: 0.19999997, z: 0.20000018}
   m_Children:
