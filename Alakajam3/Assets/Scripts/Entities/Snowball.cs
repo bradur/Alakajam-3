@@ -137,7 +137,7 @@ public class Snowball : MonoBehaviour
                     else
                     {
                         ParticleSystemDestroy explosion = Instantiate<ParticleSystemDestroy>(explosionParticle);
-                        explosion.SetParticleSize(scale * 0.2f);
+                        explosion.SetParticleSize(scale);
                         explosion.transform.position = transform.position;
                         explosion.gameObject.SetActive(true);
                         exploded = true;
