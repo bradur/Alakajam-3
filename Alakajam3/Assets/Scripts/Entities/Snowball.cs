@@ -140,6 +140,10 @@ public class Snowball : MonoBehaviour
                         {
                             ExitManager.main.StartWaiting();
                         }
+                        if (SoundManager.main != null)
+                        {
+                            SoundManager.main.PlaySound(SoundType.PlayerDie);
+                        }
                         ParticleSystemDestroy explosion = Instantiate<ParticleSystemDestroy>(explosionParticle);
                         explosion.SetParticleSize(scale);
                         explosion.transform.position = transform.position;
