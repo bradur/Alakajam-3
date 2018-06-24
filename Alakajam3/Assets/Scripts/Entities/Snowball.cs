@@ -102,8 +102,7 @@ public class Snowball : MonoBehaviour
                 if (grounded)
                 {
                     //TODO: scale according to the material below
-                    //scale = scale + growthRate * (speed * speedCoef) * Time.deltaTime;
-                    scale = Mathf.Pow(Mathf.Pow(ballCollider.radius, 3f) + growthRate * (speed * speedCoef) * Time.deltaTime, 1f / 3f);
+                    scale = scale + growthRate * (speed * speedCoef) * Time.deltaTime;
                     scales.currentScale = scale;
 
                     // distance of camera (z distance) gets bigger when scale gets bigger
@@ -190,10 +189,8 @@ public class Snowball : MonoBehaviour
                     StringFloat x = scales.growAmounts.Where(s => s.key == layerName).SingleOrDefault();
                     if (x != null)
                     {
-                        var oldscale = scale;
-                        scale = Mathf.Pow(Mathf.Pow(ballCollider.radius, 3f) + 3*x.value/(4*Mathf.PI), 1f / 3f);
-                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + (scale-oldscale), transform.localPosition.z);
-                        //scale += x.value;
+                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + x.value, transform.localPosition.z);
+                        scale += x.value;
                     }
                 }
             }
