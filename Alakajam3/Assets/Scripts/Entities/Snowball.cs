@@ -40,6 +40,9 @@ public class Snowball : MonoBehaviour
 
     private SphereCollider ballCollider;
 
+    public Vector3 contactNormal = new Vector3();
+    public Vector3 lastContactNormal = new Vector3(); 
+
     [SerializeField]
     private LayerMask snowLayer;
 
@@ -55,16 +58,19 @@ public class Snowball : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.CheckSphere(
-            transform.position,
-            ballCollider.radius * transform.localScale.y + 0.5f,
-            snowLayer
-        );
+        return grounded;
+    }
+
+    public float getRadius()
+    {
+        return ballCollider.radius;
     }
 
     // Update is called once per frame
     void Update()
     {
+        lastContactNormal = contactNormal;
+
         updateLayer(scale);
 
         float speed = rbody.velocity.magnitude;
@@ -74,7 +80,17 @@ public class Snowball : MonoBehaviour
 
         snowballMaterial.mainTextureScale = new Vector2(scale, scale);
 
-        grounded = IsGrounded();
+        var hitInfo = new RaycastHit();
+        if (Physics.SphereCast(transform.position + new Vector3(0, 0.1f, 0), ballCollider.radius, Vector3.down, out hitInfo, ballCollider.radius + 0.5f, snowLayer))
+        {
+            grounded = true;
+            contactNormal = hitInfo.normal;
+        }
+        else
+        {
+            grounded = false;
+        }
+
         int playerLayer = 10;
         int layerMask = ~(1 << playerLayer); // When checking for ground type, ignore player itself just in case
 
