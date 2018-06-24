@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/great_wall.unity
     guid: 601bdae698db95b43998fa8b9daf602c
+  - enabled: 1
+    path: Assets/Scenes/great_ball.unity
+    guid: daa4cb2a1b111444ab1cdcd64abdd66b
   m_configObjects: {}
