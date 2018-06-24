@@ -8,7 +8,8 @@ public enum SoundType
     None,
     Cow,
     SmoothCrash,
-    TightCrash
+    TightCrash,
+    PlayerDie
 }
 
 public class SoundManager : MonoBehaviour
