@@ -12,11 +12,14 @@ public class CharacterControllerDownHill : MonoBehaviour
 
     float horizontalAxis, verticalAxis;
 
+    private SphereCollider ballCollider;
+
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.maxAngularVelocity = 100f;
+        ballCollider = GetComponent<SphereCollider>();
     }
 
     // Update is called once per frame
@@ -33,8 +36,8 @@ public class CharacterControllerDownHill : MonoBehaviour
         Vector3 right = Camera.main.transform.right;
         fwd = new Vector3(fwd.x, 0, fwd.z);
         right = new Vector3(right.x, 0, right.z);
-        rb.AddTorque(right * verticalAxis * turnSpeed, ForceMode.Force);
-        rb.AddTorque(-fwd * horizontalAxis * turnSpeed, ForceMode.Force);
+        rb.AddTorque(right * verticalAxis * turnSpeed * ballCollider.radius, ForceMode.Force);
+        rb.AddTorque(-fwd * horizontalAxis * turnSpeed * ballCollider.radius, ForceMode.Force);
         //rb.AddTorque(0, 0, horizontalAxis * turnSpeed, ForceMode.Force);
     }
 
