@@ -76,7 +76,7 @@ public class Snowball : MonoBehaviour
         float speed = rbody.velocity.magnitude;
         //Only scale collider radius of _this_ object and scale the child that holds the mesh 
         ballCollider.radius = scale;
-        this.childBall.localScale = Vector3.one * scale;
+        this.childBall.localScale = 1.20f * Vector3.one * scale;
 
         snowballMaterial.mainTextureScale = new Vector2(scale, scale);
 
