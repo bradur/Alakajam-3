@@ -126,6 +126,7 @@ public class Snowball : MonoBehaviour
         {
             if (contact.otherCollider.tag == "Obstacle" && !exploded)
             {
+                Debug.Log(contact.otherCollider.tag + ", " + scale + ", " + LayerMask.LayerToName(gameObject.layer));
                 Obstacle obstacle = contact.otherCollider.gameObject.GetComponent<Obstacle>();
                 if (obstacle != null)
                 {
@@ -135,6 +136,10 @@ public class Snowball : MonoBehaviour
                     }
                     else
                     {
+                        if (ExitManager.main != null)
+                        {
+                            ExitManager.main.StartWaiting();
+                        }
                         ParticleSystemDestroy explosion = Instantiate<ParticleSystemDestroy>(explosionParticle);
                         explosion.SetParticleSize(scale);
                         explosion.transform.position = transform.position;
@@ -161,36 +166,38 @@ public class Snowball : MonoBehaviour
             {
 
                 Obstacle obstacle = trigger.GetParent();
-
-                if (!obstacle.IsCollectable())
+                if (scale >= obstacle.GetRequiredScale())
                 {
-                    trigger.CollideWithPlayer();
-                    obstacle.Destroy();
-                }
-                else
-                {
-                    if (obstacle.IsCow())
+                    if (!obstacle.IsCollectable())
                     {
-                        if (SoundManager.main != null)
-                        {
-                            SoundManager.main.PlaySound(SoundType.Cow);
-                        }
+                        trigger.CollideWithPlayer();
+                        obstacle.Destroy();
                     }
                     else
                     {
-                        if (SoundManager.main != null)
+                        if (obstacle.IsCow())
                         {
-                            SoundManager.main.PlaySound(SoundType.SmoothCrash);
+                            if (SoundManager.main != null)
+                            {
+                                SoundManager.main.PlaySound(SoundType.Cow);
+                            }
                         }
-                    }
-                    obstacle.transform.parent = transform;
-                    obstacle.SetColliderActive(false);
-                    string layerName = LayerMask.LayerToName(obstacle.gameObject.layer);
-                    StringFloat x = scales.growAmounts.Where(s => s.key == layerName).SingleOrDefault();
-                    if (x != null)
-                    {
-                        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + x.value, transform.localPosition.z);
-                        scale += x.value;
+                        else
+                        {
+                            if (SoundManager.main != null)
+                            {
+                                SoundManager.main.PlaySound(SoundType.SmoothCrash);
+                            }
+                        }
+                        obstacle.transform.parent = transform;
+                        obstacle.SetColliderActive(false);
+                        string layerName = LayerMask.LayerToName(obstacle.gameObject.layer);
+                        StringFloat x = scales.growAmounts.Where(s => s.key == layerName).SingleOrDefault();
+                        if (x != null)
+                        {
+                            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + x.value, transform.localPosition.z);
+                            scale += x.value;
+                        }
                     }
                 }
             }
