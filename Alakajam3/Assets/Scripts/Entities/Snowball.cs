@@ -201,6 +201,7 @@ public class Snowball : MonoBehaviour
                         {
                             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + x.value, transform.localPosition.z);
                             scale += x.value;
+                            scales.currentScale = scale;
                         }
                     }
                 }
