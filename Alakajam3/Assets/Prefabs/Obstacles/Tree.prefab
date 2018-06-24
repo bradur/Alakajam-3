@@ -90,7 +90,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 93c25c6e48bdf5d4ea9051d7a3c802ab, type: 3}
+  - {fileID: 2100000, guid: c9893aa2af40e1843b74d0293e4514b7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3853b96e3dfa845808108260ad7f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startThisObjectAfterCollision: {fileID: 0}
 --- !u!114 &114717759030190242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -159,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleValues: {fileID: 11400000, guid: 4a7380f15c6666b438e89ebd2d36b1eb, type: 2}
   originalScale: {x: 1, y: 1, z: 1}
+  particleSystem: {fileID: 0}
 --- !u!136 &136370319222282264
 CapsuleCollider:
   m_ObjectHideFlags: 1
