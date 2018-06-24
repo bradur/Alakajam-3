@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/riverscene.unity
     guid: 629139f0fe4a43a4cbcdcc68ffec63cb
+  - enabled: 1
+    path: Assets/Scenes/great_wall.unity
+    guid: 601bdae698db95b43998fa8b9daf602c
   m_configObjects: {}

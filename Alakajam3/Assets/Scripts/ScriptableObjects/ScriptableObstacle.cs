@@ -15,6 +15,8 @@ public class ScriptableObstacle : ScriptableObject
     public float scale = 1f;
     public float requiredScale = 1f;
 
+    public bool cow = false;
+
     public bool collectable = true;
 
 }

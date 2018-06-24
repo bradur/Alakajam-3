@@ -64,6 +64,11 @@ public class Obstacle : MonoBehaviour
         return obstacleValues.collectable;
     }
 
+    public bool IsCow()
+    {
+        return obstacleValues.cow;
+    }
+
     public Quaternion GetRelativeRotation()
     {
         return relativeRotation;
