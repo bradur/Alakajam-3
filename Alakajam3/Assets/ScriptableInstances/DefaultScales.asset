@@ -14,13 +14,13 @@ MonoBehaviour:
   objectName: ScriptableObstacle
   growAmounts:
   - key: ScaleLevel0
-    value: 0.1
+    value: 1.4
   - key: ScaleLevel1
-    value: 0.15
+    value: 2.15
   - key: ScaleLevel2
-    value: 0.25
+    value: 4
   - key: ScaleLevel3
-    value: 0.25
+    value: 4
   - key: ScaleLevel4
     value: 0.5
   - key: ScaleLevel5
@@ -41,5 +41,5 @@ MonoBehaviour:
   - key: SnowballLevel6
     value: 4
   startingScale: 0.4
-  currentScale: 0.37278903
-  snowGrowAmount: 0.035
+  currentScale: 2.84029
+  snowGrowAmount: 0.01
