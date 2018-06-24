@@ -1235,6 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40a9f86017b0ca49bfabd5ca88f038b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggleKey: 27
   exitKey: 113
   restartKey: 114
   ui: {fileID: 1011715417}

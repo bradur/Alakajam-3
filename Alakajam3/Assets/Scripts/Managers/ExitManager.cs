@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ExitManager : MonoBehaviour {
+public class ExitManager : MonoBehaviour
+{
+
+    [SerializeField]
+    private KeyCode toggleKey;
 
     [SerializeField]
     private KeyCode exitKey;
@@ -17,7 +21,7 @@ public class ExitManager : MonoBehaviour {
 
     private bool isWaiting = false;
 
-    void Awake ()
+    void Awake()
     {
         main = this;
     }
@@ -32,8 +36,19 @@ public class ExitManager : MonoBehaviour {
         isWaiting = false;
     }
 
-    void Update ()
+    void Update()
     {
+        if (Input.GetKeyUp(toggleKey))
+        {
+            if (isWaiting)
+            {
+                StopWaiting();
+            }
+            else
+            {
+                StartWaiting();
+            }
+        }
         if (isWaiting)
         {
             if (Input.GetKeyUp(exitKey))

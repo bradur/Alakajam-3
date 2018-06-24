@@ -2058,9 +2058,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.05
+  near clip plane: 0.1
   far clip plane: 5000
-  field of view: 73
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -2084,8 +2084,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 509972883}
-  m_LocalRotation: {x: 0.20059976, y: 0.7990766, z: -0.41328928, w: 0.38785082}
-  m_LocalPosition: {x: -41.558464, y: 83.16531, z: -92.06309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5786,7 +5786,7 @@ Prefab:
         type: 2}
       propertyPath: startThisObjectAfterCollision
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1984816181}
     - target: {fileID: 4246256082051874, guid: 329d131b2dc07994c919e26fda434913, type: 2}
       propertyPath: m_LocalScale.y
       value: 1
@@ -6342,7 +6342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1984816182
 MonoBehaviour:
   m_ObjectHideFlags: 0
