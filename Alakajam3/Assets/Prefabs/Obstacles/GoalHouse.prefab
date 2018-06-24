@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 199479067385918174}
   - component: {fileID: 198351403842016990}
   m_Layer: 15
-  m_Name: GoalHouseParent
+  m_Name: GoalHouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 126
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1648961425550236
 GameObject:
@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1096390571837674}
   m_LocalRotation: {x: -0.0085984785, y: 0.8600695, z: 0.0061369254, w: 0.51006746}
-  m_LocalPosition: {x: -179.6, y: -193.739, z: 364.2}
+  m_LocalPosition: {x: 58.376995, y: -106.772804, z: 399.91486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4616855176376254}
@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3853b96e3dfa845808108260ad7f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startThisObjectAfterCollision: {fileID: 0}
 --- !u!114 &114490918906486998
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -144,13 +144,13 @@ public class Snowball : MonoBehaviour
                 
                 if (!obstacle.IsCollectable())
                 {
+                    trigger.CollideWithPlayer();
                     obstacle.Destroy();
                 }
                 else
                 {
                     obstacle.transform.parent = transform;
                     obstacle.SetColliderActive(false);
-                    trigger.CollideWithPlayer();
                     string layerName = LayerMask.LayerToName(obstacle.gameObject.layer);
                     StringFloat x = scales.growAmounts.Where(s => s.key == layerName).SingleOrDefault();
                     if (x != null)
