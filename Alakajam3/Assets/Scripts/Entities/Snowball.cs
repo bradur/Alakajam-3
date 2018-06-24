@@ -119,7 +119,6 @@ public class Snowball : MonoBehaviour
     {
         foreach (ContactPoint contact in collision.contacts)
         {
-            Debug.Log(contact.otherCollider.tag);
             if (contact.otherCollider.tag == "Obstacle" && !exploded)
             {
                 Obstacle obstacle = contact.otherCollider.gameObject.GetComponent<Obstacle>();
@@ -149,7 +148,7 @@ public class Snowball : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
+        
         if (other.tag == "Obstacle" && !exploded)
         {
             ObstacleTrigger trigger = other.gameObject.GetComponent<ObstacleTrigger>();

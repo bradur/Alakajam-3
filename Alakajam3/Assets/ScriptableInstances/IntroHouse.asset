@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: House
   scale: 5
-  requiredScale: 5
+  requiredScale: 3
   cow: 0
   collectable: 0

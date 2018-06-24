@@ -29,12 +29,14 @@ public class ObstacleTrigger : MonoBehaviour
     // ends level if not null
     public void CollideWithPlayer()
     {
+        
         if (startThisObjectAfterCollision != null)
         {
             if (SoundManager.main != null)
             {
                 SoundManager.main.PlaySound(SoundType.TightCrash);
             }
+            Debug.Log(startThisObjectAfterCollision);
             startThisObjectAfterCollision.SetActive(true);
         }
     }
