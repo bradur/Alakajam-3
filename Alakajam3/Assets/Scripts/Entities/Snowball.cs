@@ -135,6 +135,10 @@ public class Snowball : MonoBehaviour
                     }
                     else
                     {
+                        if (ExitManager.main != null)
+                        {
+                            ExitManager.main.StartWaiting();
+                        }
                         ParticleSystemDestroy explosion = Instantiate<ParticleSystemDestroy>(explosionParticle);
                         explosion.SetParticleSize(scale);
                         explosion.transform.position = transform.position;
