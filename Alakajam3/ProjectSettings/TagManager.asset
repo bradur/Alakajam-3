@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Obstacle
   - Snow
+  - SoundManager
   layers:
   - Default
   - TransparentFX

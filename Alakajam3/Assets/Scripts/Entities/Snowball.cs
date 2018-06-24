@@ -157,7 +157,11 @@ public class Snowball : MonoBehaviour
             {
                 
                 Obstacle obstacle = trigger.GetParent();
-                
+                if (obstacle.IsCow())
+                {
+                    SoundManager.main.PlaySound(SoundType.Cow);
+
+                }
                 if (!obstacle.IsCollectable())
                 {
                     trigger.CollideWithPlayer();
