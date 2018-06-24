@@ -31,7 +31,10 @@ public class ObstacleTrigger : MonoBehaviour
     {
         if (startThisObjectAfterCollision != null)
         {
-            SoundManager.main.PlaySound(SoundType.TightCrash);
+            if (SoundManager.main != null)
+            {
+                SoundManager.main.PlaySound(SoundType.TightCrash);
+            }
             startThisObjectAfterCollision.SetActive(true);
         }
     }

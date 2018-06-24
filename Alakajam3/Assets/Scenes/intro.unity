@@ -618,7 +618,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
-  m_LocalRotation: {x: 0.21957962, y: -0.3227144, z: 0.0772393, w: 0.91742814}
+  m_LocalRotation: {x: 0.21962053, y: -0.3227172, z: 0.07725537, w: 0.91741604}
   m_LocalPosition: {x: -20.825459, y: 102.503685, z: 118.874985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1362,7 +1362,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4938900930227922, guid: 1cb1271dc8f2c174eb787cdfece0509e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 75.3
+      value: 37.5
       objectReference: {fileID: 0}
     - target: {fileID: 4938900930227922, guid: 1cb1271dc8f2c174eb787cdfece0509e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1442,6 +1442,21 @@ Prefab:
         type: 2}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54663325637700774, guid: 1cb1271dc8f2c174eb787cdfece0509e,
+        type: 2}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54663325637700774, guid: 1cb1271dc8f2c174eb787cdfece0509e,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54663325637700774, guid: 1cb1271dc8f2c174eb787cdfece0509e,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1cb1271dc8f2c174eb787cdfece0509e, type: 2}
@@ -1629,6 +1644,24 @@ Prefab:
       propertyPath: startThisObjectAfterCollision
       value: 
       objectReference: {fileID: 126802150}
+    - target: {fileID: 114021493608790738, guid: 329d131b2dc07994c919e26fda434913,
+        type: 2}
+      propertyPath: obstacleValues
+      value: 
+      objectReference: {fileID: 11400000, guid: 37461dbc4e87d0242b34d70d2af60914,
+        type: 2}
+    - target: {fileID: 4616855176376254, guid: 329d131b2dc07994c919e26fda434913, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616855176376254, guid: 329d131b2dc07994c919e26fda434913, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616855176376254, guid: 329d131b2dc07994c919e26fda434913, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 329d131b2dc07994c919e26fda434913, type: 2}
   m_IsPrefabParent: 0
@@ -1863,7 +1896,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1265978568}
-  m_LocalRotation: {x: 0.21957962, y: -0.3227144, z: 0.0772393, w: 0.91742814}
+  m_LocalRotation: {x: 0.21962053, y: -0.3227172, z: 0.07725537, w: 0.91741604}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.20000018, y: 0.19999997, z: 0.20000018}
   m_Children:
@@ -2338,7 +2371,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1551644118}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8738704bba60f241abb2fba111710d3, type: 3}
   m_Name: 
@@ -2352,12 +2385,24 @@ MonoBehaviour:
   speed: 20
   maxVelocityMagnitude: 40
   rotationFollower: {fileID: 0}
+--- !u!114 &1551644121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1551644118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36556f0d024947b4d95edd51f53c4556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 15
 --- !u!43 &1599855405
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-823472
+  m_Name: pb_Mesh-11407094
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

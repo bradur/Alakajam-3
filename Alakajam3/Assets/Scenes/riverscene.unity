@@ -13248,13 +13248,25 @@ GameObject:
   m_PrefabParentObject: {fileID: 1674733291169190, guid: 1cb1271dc8f2c174eb787cdfece0509e,
     type: 2}
   m_PrefabInternal: {fileID: 507680117}
---- !u!114 &2076196545
+--- !u!114 &2076196540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2076196539}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36556f0d024947b4d95edd51f53c4556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 10
+--- !u!114 &2076196545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2076196539}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8738704bba60f241abb2fba111710d3, type: 3}
   m_Name: 
