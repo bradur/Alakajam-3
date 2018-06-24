@@ -39,7 +39,10 @@ public class Obstacle : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        transform.localScale = originalScale * obstacleValues.scale;
+        if (obstacleValues != null)
+        {
+            transform.localScale = originalScale * obstacleValues.scale;
+        }
     }
 
     public float GetRequiredScale()
